@@ -21,7 +21,7 @@ class ListsSuite extends munit.FunSuite:
   }
 
   test("one plus one is three (0pts)?") {
-    assert(1 + 1 == 3) // This assertion fails! Go ahead and fix it.
+    assert(1 + 1 != 3) // This assertion fails! Go ahead and fix it.
   }
 
   /**
@@ -57,7 +57,7 @@ class ListsSuite extends munit.FunSuite:
    * when writing tests.
    */
   test("details why one plus one is not three (0pts)") {
-    assertEquals(1 + 1, 3) // Fix me, please!
+    assertEquals(1 + 1, 2) // Fix me, please!
   }
 
   /**
@@ -67,17 +67,17 @@ class ListsSuite extends munit.FunSuite:
    * In the following example, we test the fact that the method `intNotZero`
    * throws an `IllegalArgumentException` if its argument is `0`.
    */
-   test("intNotZero throws an exception if its argument is 0") {
-     try
-       intNotZero(0)
-       fail("No exception has been thrown")
-     catch
-       case e: IllegalArgumentException => ()
-   }
+  test("intNotZero throws an exception if its argument is 0") {
+    try
+      intNotZero(0)
+      fail("No exception has been thrown")
+    catch
+      case e: IllegalArgumentException => ()
+  }
 
-   def intNotZero(x: Int): Int =
-     if x == 0 then throw IllegalArgumentException("zero is not allowed")
-     else x
+  def intNotZero(x: Int): Int =
+    if x == 0 then throw IllegalArgumentException("zero is not allowed")
+    else x
 
   /**
    * Now we finally write some tests for the list functions that have to be
@@ -106,7 +106,41 @@ class ListsSuite extends munit.FunSuite:
     assert(max(List(3, 7, 2)) == 7)
   }
 
+  test("sum of elements in an empty list") {
+    assert(sum(Nil) == 0)
+  }
 
+  test("sum of elements in list with only one element") {
+    assert(sum(List(10)) == 10)
+  }
+
+  test("sum of elements in a list with only two elements") {
+    assert(sum(List(5, 10)) == 15)
+  }
+
+  test("sum of elements less than zero") {
+    assert(sum(List(-5, -10, -15)) == -30)
+  }
+
+  test("max element in a list with one element only") {
+    assertEquals(max(List(55)), 55)
+  }
+
+  test("max element in a list with two elements") {
+    assertEquals(max(List(-10, -10)), -10)
+  }
+
+  test("max element with max in the beggining") {
+    assertEquals(max(List(-5, -100, -200)), -5)
+  }
+
+  test("max method invoked on an empty list must call an NoSuchElementException") {
+    try
+      max(List())
+      fail("No exception has been thrown")
+    catch
+      case e: NoSuchElementException => ()
+  }
 
   import scala.concurrent.duration.*
   override val munitTimeout = 1.seconds
