@@ -52,3 +52,4 @@ object Lists:
 
     find(xs, xs.head)
   }
+

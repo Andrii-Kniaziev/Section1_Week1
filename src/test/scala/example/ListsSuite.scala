@@ -144,3 +144,4 @@ class ListsSuite extends munit.FunSuite:
 
   import scala.concurrent.duration.*
   override val munitTimeout = 1.seconds
+
