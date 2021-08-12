@@ -23,12 +23,12 @@ object Lists:
    * @return The sum of all elements in `xs`
    */
   def sum(xs: List[Int]): Int = {
-    def accumulate(list: List[Int], size: Int): Int = {
-      if (size == 0) 0
-      else list(size - 1) + accumulate(list, size - 1)
+    def accumulate(list: List[Int], acc: Int): Int = list match {
+      case Nil => acc
+      case x :: xs => accumulate(xs, x + acc)
     }
 
-    accumulate(xs, xs.size)
+    accumulate(xs, 0)
   }
 
   /**
